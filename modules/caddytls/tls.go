@@ -20,6 +20,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"reflect"
 	"runtime/debug"
 	"sync"
 	"time"
@@ -32,6 +33,10 @@ import (
 func init() {
 	caddy.RegisterModule(TLS{})
 	caddy.RegisterModule(AutomateLoader{})
+
+	caddy.RegisterType("tls.certificates", []reflect.Type{
+		reflect.TypeOf((*CertificateLoader)(nil)).Elem(),
+	})
 }
 
 // TLS provides TLS facilities including certificate
@@ -543,6 +548,11 @@ func (AutomateLoader) CaddyModule() caddy.ModuleInfo {
 		ID:  "tls.certificates.automate",
 		New: func() caddy.Module { return new(AutomateLoader) },
 	}
+}
+
+// LoadCertificates is a stub so AutomateLoader can implement CertificateLoader
+func (AutomateLoader) LoadCertificates() ([]Certificate, error) {
+	return nil, nil
 }
 
 // CertCacheOptions configures the certificate cache.

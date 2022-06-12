@@ -23,6 +23,7 @@ import (
 	"os"
 	"path"
 	"path/filepath"
+	"reflect"
 	"strconv"
 	"strings"
 	"time"
@@ -35,6 +36,10 @@ import (
 
 func init() {
 	weakrand.Seed(time.Now().UnixNano())
+
+	caddy.RegisterType("http.precompressed", []reflect.Type{
+		reflect.TypeOf((*encode.Precompressed)(nil)).Elem(),
+	})
 
 	caddy.RegisterModule(FileServer{})
 }

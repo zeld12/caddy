@@ -20,11 +20,18 @@ import (
 	"encoding/base64"
 	"fmt"
 	"os"
+	"reflect"
 	"strings"
 
 	"github.com/caddyserver/caddy/v2"
 	"github.com/mholt/acmez"
 )
+
+func init() {
+	caddy.RegisterType("tls.handshake_match", []reflect.Type{
+		reflect.TypeOf((*ConnectionMatcher)(nil)).Elem(),
+	})
+}
 
 // ConnectionPolicies govern the establishment of TLS connections. It is
 // an ordered group of connection policies; the first matching policy will

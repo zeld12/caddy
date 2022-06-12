@@ -25,6 +25,7 @@ import (
 	"net/http"
 	"net/textproto"
 	"net/url"
+	"reflect"
 	"regexp"
 	"strconv"
 	"strings"
@@ -42,6 +43,19 @@ import (
 
 func init() {
 	caddy.RegisterModule(Handler{})
+
+	caddy.RegisterType("http.reverse_proxy.circuit_breakers", []reflect.Type{
+		reflect.TypeOf((*CircuitBreaker)(nil)).Elem(),
+	})
+	caddy.RegisterType("http.reverse_proxy.selection_policies", []reflect.Type{
+		reflect.TypeOf((*Selector)(nil)).Elem(),
+	})
+	caddy.RegisterType("http.reverse_proxy.transport", []reflect.Type{
+		reflect.TypeOf((*http.RoundTripper)(nil)).Elem(),
+	})
+	caddy.RegisterType("http.reverse_proxy.upstreams", []reflect.Type{
+		reflect.TypeOf((*UpstreamSource)(nil)).Elem(),
+	})
 }
 
 // Handler implements a highly configurable and production-ready reverse proxy.

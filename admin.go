@@ -32,6 +32,7 @@ import (
 	"net/url"
 	"os"
 	"path"
+	"reflect"
 	"regexp"
 	"strconv"
 	"strings"
@@ -44,6 +45,12 @@ import (
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 )
+
+func init() {
+	RegisterType("caddy.config_loaders", []reflect.Type{
+		reflect.TypeOf((*ConfigLoader)(nil)).Elem(),
+	})
+}
 
 // AdminConfig configures Caddy's API endpoint, which is used
 // to manage Caddy while it is running.

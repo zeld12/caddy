@@ -345,7 +345,6 @@ EXPERIMENTAL: May be changed or removed.
 			return fs
 		}(),
 	})
-
 }
 
 // RegisterCommand registers the command cmd.

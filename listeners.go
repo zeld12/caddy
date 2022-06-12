@@ -21,6 +21,7 @@ import (
 	"fmt"
 	"net"
 	"os"
+	"reflect"
 	"strconv"
 	"strings"
 	"sync"
@@ -31,6 +32,12 @@ import (
 	"github.com/lucas-clemente/quic-go"
 	"github.com/lucas-clemente/quic-go/http3"
 )
+
+func init() {
+	RegisterType("caddy.listeners", []reflect.Type{
+		reflect.TypeOf((*ListenerWrapper)(nil)).Elem(),
+	})
+}
 
 // Listen is like net.Listen, except Caddy's listeners can overlap
 // each other: multiple listeners may be created on the same socket
