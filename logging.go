@@ -313,7 +313,7 @@ func (sll *StandardLibLog) provision(ctx Context, logging *Logging) error {
 // are populated, all logs are emitted.
 type CustomLog struct {
 	// The writer defines where log entries are emitted.
-	// A `writrer` should implement the following interfaces:
+	// A `writer` should implement the following interfaces:
 	// - [caddy.WriteOpener](https://pkg.go.dev/github.com/caddyserver/caddy/v2?tab=doc#WriterOpener)
 	WriterRaw json.RawMessage `json:"writer,omitempty" caddy:"namespace=caddy.logging.writers inline_key=output"`
 
