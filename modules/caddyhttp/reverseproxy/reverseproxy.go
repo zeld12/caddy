@@ -25,7 +25,6 @@ import (
 	"net/http"
 	"net/textproto"
 	"net/url"
-	"reflect"
 	"regexp"
 	"strconv"
 	"strings"
@@ -44,17 +43,17 @@ import (
 func init() {
 	caddy.RegisterModule(Handler{})
 
-	caddy.RegisterType("http.reverse_proxy.circuit_breakers", []reflect.Type{
-		reflect.TypeOf((*CircuitBreaker)(nil)).Elem(),
+	caddy.RegisterType("http.reverse_proxy.circuit_breakers", []interface{}{
+		(*CircuitBreaker)(nil),
 	})
-	caddy.RegisterType("http.reverse_proxy.selection_policies", []reflect.Type{
-		reflect.TypeOf((*Selector)(nil)).Elem(),
+	caddy.RegisterType("http.reverse_proxy.selection_policies", []interface{}{
+		(*Selector)(nil),
 	})
-	caddy.RegisterType("http.reverse_proxy.transport", []reflect.Type{
-		reflect.TypeOf((*http.RoundTripper)(nil)).Elem(),
+	caddy.RegisterType("http.reverse_proxy.transport", []interface{}{
+		(*http.RoundTripper)(nil),
 	})
-	caddy.RegisterType("http.reverse_proxy.upstreams", []reflect.Type{
-		reflect.TypeOf((*UpstreamSource)(nil)).Elem(),
+	caddy.RegisterType("http.reverse_proxy.upstreams", []interface{}{
+		(*UpstreamSource)(nil),
 	})
 }
 

@@ -23,7 +23,6 @@ import (
 	"net/url"
 	"path"
 	"path/filepath"
-	"reflect"
 	"regexp"
 	"sort"
 	"strconv"
@@ -178,8 +177,8 @@ func init() {
 	caddy.RegisterModule(new(MatchProtocol))
 	caddy.RegisterModule(MatchRemoteIP{})
 	caddy.RegisterModule(MatchNot{})
-	caddy.RegisterType("http.matchers", []reflect.Type{
-		reflect.TypeOf((*RequestMatcher)(nil)).Elem(),
+	caddy.RegisterType("http.matchers", []interface{}{
+		(*RequestMatcher)(nil),
 	})
 }
 

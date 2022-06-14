@@ -32,7 +32,6 @@ import (
 	"net/url"
 	"os"
 	"path"
-	"reflect"
 	"regexp"
 	"strconv"
 	"strings"
@@ -47,9 +46,7 @@ import (
 )
 
 func init() {
-	RegisterType("caddy.config_loaders", []reflect.Type{
-		reflect.TypeOf((*ConfigLoader)(nil)).Elem(),
-	})
+	RegisterType("caddy.config_loaders", []interface{}{(*ConfigLoader)(nil)})
 }
 
 // AdminConfig configures Caddy's API endpoint, which is used

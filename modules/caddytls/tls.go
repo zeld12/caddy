@@ -20,7 +20,6 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"reflect"
 	"runtime/debug"
 	"sync"
 	"time"
@@ -34,8 +33,8 @@ func init() {
 	caddy.RegisterModule(TLS{})
 	caddy.RegisterModule(AutomateLoader{})
 
-	caddy.RegisterType("tls.certificates", []reflect.Type{
-		reflect.TypeOf((*CertificateLoader)(nil)).Elem(),
+	caddy.RegisterType("tls.certificates", []interface{}{
+		(*CertificateLoader)(nil),
 	})
 }
 

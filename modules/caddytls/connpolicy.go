@@ -21,7 +21,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
-	"reflect"
 	"strings"
 
 	"github.com/caddyserver/caddy/v2"
@@ -29,8 +28,8 @@ import (
 )
 
 func init() {
-	caddy.RegisterType("tls.handshake_match", []reflect.Type{
-		reflect.TypeOf((*ConnectionMatcher)(nil)).Elem(),
+	caddy.RegisterType("tls.handshake_match", []interface{}{
+		(*ConnectionMatcher)(nil),
 	})
 
 	caddy.RegisterModule(LeafCertClientAuth{})
